@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Adamus Capital</title>
-        <link rel="icon" href="static/Adamus Capital favicon- Copia.png">
-        <link rel="stylesheet" href="static/estilos.css">
+        <link rel="icon" href="../static/Adamus Capital favicon- Copia.png">
+        <link rel="stylesheet" href="../static/estilos.css">
         <meta name="description" content="Boutique investment and advisory firm focused on strategic investments and advanced consulting">
        
     </head>
@@ -17,7 +17,7 @@
                 <nav>
                     <div class="logo">
                         <a href="#inicio">
-                            <img src="static/Adamus Capital logo.png" alt="Adamus Capital" class="logo-img">
+                            <img src="../static/Adamus Capital logo.png" alt="Adamus Capital" class="logo-img">
                         </a>
                     </div>
                     <div class="hamburger" id="hamburger">☰</div>
@@ -148,14 +148,7 @@
                 </div>
                 
                 <div class="contact-container">
-                    <form class="inquiry-form" action="https://formsubmit.co/dakho2003@gmail.com" method="POST">
-                        <!-- FormSubmit Configuration -->
-                        <input type="hidden" name="_next" value="https://formsubmit.co/thank-you.html">
-                        <input type="hidden" name="_subject" value="Nueva consulta desde Adamus Capital">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_autoresponse" value="Thank you for contacting Adamus Capital. We have received your inquiry and will review it carefully. Our team will respond to qualified inquiries within 2-3 business days.">
-                        
+                    <form class="inquiry-form" action="/send" method="POST">
                         <!-- Versión para PC: First + Last -->
                         <div class="form-row name-group-desktop">
                             <div class="form-group">
@@ -218,11 +211,11 @@
 
         <footer>
             <div class="container">
-                <p>Adamus Capital — Connecting Capital with Positive Human Impact </p>
+                <p>Adamus Capital — Connecting Capital with Positive Human Impact</p>
             </div>
         </footer>
 
-        <script src="static/adamus.js"></script>
+        <script src="../static/adamus.js"></script>
         
     </body>
     </html>

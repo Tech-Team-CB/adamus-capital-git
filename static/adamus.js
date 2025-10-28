@@ -52,9 +52,8 @@ document.querySelectorAll('.section-header, .approach-item, .value-item, .locati
     observer.observe(el);
 });
 
-//Form handling - Solo validaciones, luego envío con AJAX para mostrar mensaje personalizado
+//Form handling
 document.querySelector('.inquiry-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevenir envío normal para manejar con AJAX
 
     // Elimina mensajes de error previos
     document.querySelectorAll('.input-error-message').forEach(el => el.remove());
@@ -156,137 +155,43 @@ document.querySelector('.inquiry-form').addEventListener('submit', function (e) 
         }
     }
     
-    // Si la validación falla, no continuar
+
     if (!valid) {
+        e.preventDefault();
         return false;
     }
-    
-    // Si llegamos aquí, las validaciones pasaron
     const submitBtn = document.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
+
+    // Simulate form submission
+    submitBtn.textContent = 'Submitting...';
     submitBtn.style.background = '#666';
     submitBtn.disabled = true;
-    
-    // Preparar datos del formulario para envío AJAX
-    const formData = new FormData(this);
-    
-    // Enviar con fetch
-    fetch('https://formsubmit.co/dakho2003@gmail.com', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        // Cambiar botón a estado de éxito
-        submitBtn.textContent = 'Message Sent Successfully!';
-        submitBtn.style.background = '#28a745';
-        
-        // Limpiar formulario
-        this.reset();
-        
-        // Mostrar mensaje de confirmación elegante
-        showSuccessMessage();
-        
-        // Restaurar botón después de 3 segundos
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = '#1a1a1a';
-            submitBtn.disabled = false;
-        }, 3000);
-    })
-    .catch(error => {
-        // En caso de error
-        submitBtn.textContent = 'Error - Please try again';
-        submitBtn.style.background = '#dc3545';
-        
-        // Restaurar botón después de 3 segundos
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = '#1a1a1a';
-            submitBtn.disabled = false;
-        }, 3000);
-    });
-});
 
-// Función para mostrar mensaje de éxito elegante
-function showSuccessMessage() {
-    // Crear overlay
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    `;
-    
-    // Crear modal
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        background: white;
-        padding: 40px;
-        border-radius: 10px;
-        text-align: center;
-        max-width: 500px;
-        margin: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        transform: scale(0.7);
-        transition: transform 0.3s ease;
-    `;
-    
-    modal.innerHTML = `
-        <div style="color: #28a745; font-size: 48px; margin-bottom: 20px;">✓</div>
-        <h2 style="color: #333; margin-bottom: 15px; font-size: 24px;">Message Sent Successfully!</h2>
-        <p style="color: #666; line-height: 1.6; margin-bottom: 25px;">
-            Thank you for your inquiry. We have received your message and will review it carefully. 
-            Our team will respond to qualified inquiries within 2-3 business days.
-        </p>
-        <button id="closeModal" style="
-            background: #1a1a1a;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        ">Close</button>
-    `;
-    
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
-    
-    // Animar entrada
     setTimeout(() => {
-        overlay.style.opacity = '1';
-        modal.style.transform = 'scale(1)';
-    }, 10);
-    
-    // Función para cerrar modal
-    function closeModal() {
-        overlay.style.opacity = '0';
-        modal.style.transform = 'scale(0.7)';
+        submitBtn.textContent = 'Inquiry Received';
+        submitBtn.style.background = '#4a4a4a';
+
         setTimeout(() => {
-            document.body.removeChild(overlay);
-        }, 300);
-    }
-    
-    // Eventos para cerrar
-    document.getElementById('closeModal').addEventListener('click', closeModal);
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closeModal();
-    });
-    
-    // Auto cerrar después de 5 segundos
-    setTimeout(closeModal, 5000);
-}
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '#1a1a1a';
+            submitBtn.disabled = false;
+
+            // Reset form
+            this.reset();
+
+            // Show subtle confirmation
+            const form = document.querySelector('.inquiry-form');
+            const confirmation = document.createElement('div');
+            confirmation.innerHTML = '<p style="text-align: center; color: #666; font-size: 14px; margin-top: 20px; font-weight: 300;">Thank you. Your inquiry has been received and will be reviewed.</p>';
+            form.appendChild(confirmation);
+
+            setTimeout(() => {
+                confirmation.remove();
+            }, 4000);
+        }, 2000);
+    }, 1500);
+});
 
 // Staggered animation for approach items
 const approachItems = document.querySelectorAll('.approach-item');

@@ -46,7 +46,7 @@
             }
 
             .logo {
-                max-width: 180px;
+
                 letter-spacing: 3px;
                 position: relative;
                 display: flex;
@@ -792,24 +792,5 @@
                 line-height: 1.6;
                 color: white;
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            }
-
-            /* Estilos responsivos para el logo */
-            .logo-img {
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            @media (max-width: 768px) {
-                .logo {
-                    max-width: 150px !important; /* Tamaño reducido para móviles */
-                    width: 150px !important;
-                }
-                .logo-img {
-                    width: 100% !important;
-                    height: auto !important;
-                    max-width: 100% !important;
-                }
             }
 
