@@ -545,6 +545,16 @@
                 .form-row {
                     flex-direction: column;
                 }
+
+                /* Fix para logo en móviles - evita estiramiento en iPhones */
+                .logo-img {
+                    height: auto !important;
+                    width: 100%;
+                    max-width: 200px;
+                    max-height: 50px;
+                    object-fit: contain;
+                    display: block;
+                }
             }
 
             /* Contact Form Styles */
